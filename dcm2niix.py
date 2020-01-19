@@ -4,7 +4,7 @@ from plumbum import local, FG
 from plumbum.cmd import cmake
 import logging
 
-DEFAULT_HASH = '54cfd51'
+DEFAULT_HASH = 'c0a3731'
 
 def make(commit=DEFAULT_HASH):
 
