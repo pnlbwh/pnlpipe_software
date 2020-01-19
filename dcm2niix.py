@@ -29,7 +29,7 @@ def make(commit=DEFAULT_HASH):
 
     blddir.mkdir()
     with local.cwd(blddir):
-        cmake(repo)
+        cmake(repo, "-DUSE_STATIC_RUNTIME:BOOL=OFF")
         import plumbum.cmd
         plumbum.cmd.make['-j', psutil.cpu_count(logical=False)] & FG
 
