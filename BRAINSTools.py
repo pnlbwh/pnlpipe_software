@@ -5,7 +5,7 @@ from plumbum.cmd import cmake, make
 import logging
 log = logging.getLogger(__name__)
 import os
-
+import fileinput
 
 DEFAULT_HASH = '81a409d'
 
@@ -22,6 +22,10 @@ def make(commit=DEFAULT_HASH, delete=False):
     blddir = dest / "BRAINSTools-build"
     with local.cwd(dest):
         repo = downloadGithubRepo('BRAINSia/BRAINSTools', commit)
+    
+    for line in fileinput.input(repo / 'SuperBuild' / 'External_ITKv5.cmake', inplace=True):
+        print(line.replace('itk.org', 'github.com/InsightSoftwareConsortium'), end='')
+        
     sha, date = getCommitInfo(repo)
 
     out = dest / ('BRAINSTools-bin-'+sha)
