@@ -15,9 +15,9 @@ def readFreeSurferVersion():
         buildStamp = f.read()
 
     import re
-    p = re.compile('v\d\.\d\.\d(-\w+)?$')
+    p = re.compile('\d\.\d\.\d')
     try:
-        version = p.search(buildStamp).group()[1:]
+        version = p.search(buildStamp).group()
     except:
         raise Exception("Couldn't extract FreeSurfer version from {}/build-stamp.txt, either that file is malformed or the regex used to extract the version is incorrect.".format(freesurferHome))
 
