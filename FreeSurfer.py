@@ -34,7 +34,7 @@ and FREESURFER_HOME is set (currently unset).".format(version))
 and FREESURFER_HOME is set (currently set to version {}).".format(version,
                                                                           currentVersion))
 
-    print("Version ({}) of FreeSurfer is set in FREESURFER_HOME.".format(version))
+    print("Version ({}) of FreeSurfer is set in FREESURFER_HOME.".format(currentVersion))
 
 def make(version=DEFAULT_VERSION):
     try:
