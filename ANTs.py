@@ -31,10 +31,10 @@ def make(commit=DEFAULT_HASH):
 
 
     # copy ANTs scripts
-    cp('-a', (softdir / 'ANTs' / 'Scripts').list(), blddir / 'ANTs-build' / 'Examples')
+    cp('-a', (softdir / 'ANTs' / 'Scripts').list(), blddir / 'ANTS-build' / 'Examples')
 
     # move binary directory
-    (blddir / 'ANTs-build' / 'Examples').move(out)
+    (blddir / 'ANTS-build' / 'Examples').move(out)
 
     # write PATH and ANTSPATH
     with open(out / 'env.sh', 'w') as f:
