@@ -4,7 +4,7 @@ from plumbum import local, FG
 from plumbum.cmd import cmake, make
 import logging
 log = logging.getLogger(__name__)
-import os
+from os import getenv
 import fileinput
 
 DEFAULT_HASH = '81a409d'
@@ -68,7 +68,7 @@ def make(commit=DEFAULT_HASH, delete=False):
               )
 
         import plumbum.cmd
-        plumbum.cmd.make['-j', psutil.cpu_count(logical=False)] & FG
+        plumbum.cmd.make['-j', getenv('PNLPIPE_BUILD_NCPU','4')] & FG
     (blddir / 'bin').move(out)
 
 

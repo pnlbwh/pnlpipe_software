@@ -3,6 +3,7 @@ import psutil
 from plumbum import local, FG
 from plumbum.cmd import cmake, cp
 import logging
+from os import getenv
 
 DEFAULT_HASH = '1195345'
 
@@ -27,7 +28,7 @@ def make(commit=DEFAULT_HASH):
     with local.cwd(blddir):
         cmake(repo)
         import plumbum.cmd
-        plumbum.cmd.make['-j', psutil.cpu_count(logical=False)] & FG
+        plumbum.cmd.make['-j', getenv('PNLPIPE_BUILD_NCPU','4')] & FG
 
 
     # copy ANTs scripts

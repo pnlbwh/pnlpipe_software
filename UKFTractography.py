@@ -3,6 +3,7 @@ import psutil
 from plumbum import local, FG
 from plumbum.cmd import cmake
 import logging
+from os import getenv
 
 DEFAULT_HASH = 'fcf83e2'
 
@@ -31,7 +32,7 @@ def make(commit=DEFAULT_HASH):
     with local.cwd(blddir):
         cmake(repo)
         import plumbum.cmd
-        plumbum.cmd.make['-j', psutil.cpu_count(logical=False)] & FG
+        plumbum.cmd.make['-j', getenv('PNLPIPE_BUILD_NCPU','4')] & FG
 
     binary1 = blddir / 'ukf/bin/UKFTractography'
     binary2 = blddir / 'UKFTractography-build/UKFTractography/bin/UKFTractography' # later commits

@@ -3,6 +3,7 @@ import psutil
 from plumbum import local, FG
 from plumbum.cmd import cmake
 import logging
+from os import getenv
 
 DEFAULT_HASH = 'c0a3731'
 
@@ -31,7 +32,7 @@ def make(commit=DEFAULT_HASH):
     with local.cwd(blddir):
         cmake(repo, "-DUSE_STATIC_RUNTIME:BOOL=OFF")
         import plumbum.cmd
-        plumbum.cmd.make['-j', psutil.cpu_count(logical=False)] & FG
+        plumbum.cmd.make['-j', getenv('PNLPIPE_BUILD_NCPU','4')] & FG
 
     binary = blddir / 'bin/dcm2niix'
 
